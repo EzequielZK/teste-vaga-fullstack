@@ -6,6 +6,7 @@ import { DataResponse } from '@/lib/types';
 import isCpf from '@/lib/validations/isCpf';
 import isCnpj from '@/lib/validations/isCnpj';
 import { format } from 'date-fns';
+import path from 'path';
 
 export default async function getData(
   page: number = 0,
@@ -15,7 +16,9 @@ export default async function getData(
   const results: any[] = [];
 
   let data: DataResponse = await new Promise(resolve => {
-    fs.createReadStream('public/data.csv')
+    const dataPath = path.join(process.cwd(), 'data.csv');
+
+    fs.createReadStream('data.csv')
       .pipe(csv())
       .on('data', data => results.push(data))
       .on('end', () => {

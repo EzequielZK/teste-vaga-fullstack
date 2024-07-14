@@ -25,14 +25,13 @@ export default function CustomTable() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    
     getCsvData(0, 10);
   }, []);
 
-  const headers = data && data.items.length ? Object.keys(data.items[0]) : [];
-
   const getCsvData = async (page: number, size: number, search?: string) => {
     const csv = await getData(page, size, search);
-
+    
     setData(csv);
     setLoading(false);
   };
@@ -53,6 +52,7 @@ export default function CustomTable() {
     await getCsvData(0, rowsPerPage, search);
   };
 
+  const headers = data && data.items.length ? Object.keys(data.items[0]) : [];
   return (
     <div className='max-h-screen flex flex-col p-8'>
       <Paper className='flex flex-col flex-1 justify-between w-full overflow-hidden'>
