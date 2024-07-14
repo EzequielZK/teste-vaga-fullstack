@@ -18,7 +18,7 @@ export default async function getData(
   let data: DataResponse = await new Promise(resolve => {
     const dataPath = path.join(process.cwd(), 'data.csv');
 
-    fs.createReadStream('data.csv')
+    fs.createReadStream(dataPath)
       .pipe(csv())
       .on('data', data => results.push(data))
       .on('end', () => {
