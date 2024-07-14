@@ -15,7 +15,7 @@ export default async function getData(
   const results: any[] = [];
 
   let data: DataResponse = await new Promise(resolve => {
-    fs.createReadStream('data.csv')
+    fs.createReadStream('public/data.csv')
       .pipe(csv())
       .on('data', data => results.push(data))
       .on('end', () => {
